@@ -1,13 +1,214 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+* {
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  font-size: 16px;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  position: relative;
+  background-color: #f3f7fa;
+  color: #4a4a4a;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+  background-color: rgb(235, 235, 235);
+}
+
+a {
+  display: inline-block;
+}
+
+.app {
+  max-width: 1024px;
+  padding: 1.25rem;
+  margin: 0 auto;
+  min-height: 100vh;
+  
+}
+
+@media (min-width: 525px) {
+    .root {
+        padding: 3.125rem 6.25rem 6.25rem;
+    }
+}
+
+
+/* Header */
+.header {
+  padding: 50px 0 ;
+  text-align: center;
+}
+.logo {
+  width: 60px;
+}
+
+/* layout */
+.layout {
+  display: flex;
+}
+
+
+
+/* sidebar */
+.sidebar {
+  width: 232px;
+  margin-right: 20px;
+  position: relative;
+  box-shadow: rgba(91, 137, 164, 0.25) 0px 1px 4px;
+  border-radius: 5px;
+  padding: 0 15px;
+  background: #ffffff;
+}
+
+.main {
+  flex: 1;
+}
+
+.transfers {
+  margin-bottom: 20px;
+}
+
+.transfer {
+  display: flex;
+  background: #ffffff;
+}
+
+.filterPrice {
+  display: flex;
+  min-width: 502px;
+  justify-content: space-between;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  background: #ffffff;
+  overflow: hidden;
+}
+.filterElement {
+  border: 1px solid #dfe5ec;
+  width: 50%;
+  text-align: center;
+  padding: 12px;
+
+  
+}
+.filterLow__price {
+  border-right: none;
+}
+.filterElement:hover, .filterElement:active, .filterElement.active {
+  background: #2196f3;
+  color: #fff;
+  cursor: pointer;
+}
+
+.ticket {
+  display: flex;
+  flex-direction: column;
+  min-height: 161px;
+  box-shadow: rgba(91, 137, 164, 0.25) 0px 1px 4px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  transition: box-shadow 0.15s ease-in-out 0s;
+  cursor: pointer;
+  padding: 20px;
+  background: #ffffff;
+}
+.ticketHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  align-items: center;
+}
+.ticketPrice {
+  color: #2196f3;
+  font-size: 24px;
+  padding-top: 6px;
+  font-weight: 600;
+}
+.ticketLogo {
+  width: 140px;
+}
+.ticketLogo img {
+  width: 100px;
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+.ticketData {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+  
+}
+
+.ticketData__item p {
+  margin: 0;
+}
+.ticketData__item:last-child {
+  width: 140px;
+}
+.ticketData__item__grey {
+  color: #a0b0b9;
+}
+
+
+.ticket:hover {
+  box-shadow: rgba(91, 137, 164, 0.1) 0px 5px 25px;
+}
+
+
+
+.transfer input {
+  display: none;
+}
+
+.transfer label {
+  margin-right: 10px;
+  border: 2px solid #ddd;
+  border-radius: 4px;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .25s ease;
+}
+.transferFilterItem {
+  cursor: pointer;
+  margin-bottom: 8px;
+  user-select: none;
+}
+.transfer svg {
+  color: #ccc;
+  opacity: 0;
+  font-size: 12px;
+  transition: all .25s ease;
+}
+
+.transfer input:checked + label {
+  background:  #2196f3;
+  border-color: #2196f3;
+}
+.transfer input:checked + label svg {
+  color: #ffffff;
+  opacity: 1;
+}
+.transferFilterItem {
+  display: flex;
+  align-items: center;
+}
+.filterForm {
+  width: 100%;
 }
