@@ -38,7 +38,7 @@ export default function Tickets({tickets}) {
                                 " - " +
                                new Date(
                                 new Date(segment.date).setHours(
-                                    new Date().getHours() + Math.floor(segment.duration / 60)
+                                    new Date().getHours() + Math.ceil(segment.duration / 60)
                                 )
                                ).getHours() + 
                                ":" +
@@ -55,11 +55,11 @@ export default function Tickets({tickets}) {
                           <p className="ticketData__item__grey">
                               В пути
                           </p>
-                        <p>{ `08:00 - 10:00` }</p>   
+                        <p>{ `${Math.ceil(segment.duration / 60)} : ${segment.duration % 60}` }</p>   
                       </div>
                       <div className="ticketData__item">
                           <p className="ticketData__item__grey">
-                            Пересадок { segment.stops.length }
+                             { segment.stops.length === 0 ? 'Без пересадок' : `Пересадок ${segment.stops.length}` }
                           </p>
                             <p>{ segment.stops.join(', ') }</p>   
                       </div>
