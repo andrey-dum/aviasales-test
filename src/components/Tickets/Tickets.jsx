@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Tickets() {
+export default function Tickets({tickets}) {
     return (
         <div className="tickets">
 
@@ -13,59 +13,61 @@ export default function Tickets() {
                 </div>    
             </div>
 
-            <div className="ticket">
+            {tickets.map((ticket) => (
+            
+            <div className="ticket" key={`${ticket.price}_${ticket.duration}`}>
                 <div className="ticketHeader">
                     <div className="ticketPrice">
-                        13 400 Р
+                        {ticket.price} Р
                     </div>
                     <div className="ticketLogo">
-                        <img src="https://logopond.com/logos/cfe0510f7a2888be7ea56da181e90d4a.png" alt=""/>
+                        <img src={`//pics.avs.io/99/36/${ticket.carrier}.png`} alt=""/>
+                        {/* <img src="https://logopond.com/logos/cfe0510f7a2888be7ea56da181e90d4a.png" alt=""/> */}
                     </div>
                 </div>
-
-                <div className="ticketData">
-                   
-                    <div className="ticketData__item">
-                        <p className="ticketData__item__grey">
-                            MOW - HKT
-                        </p>
-                        <p>10:45 - 08:00</p>   
-                    </div>
-                    <div className="ticketData__item">
-                        <p className="ticketData__item__grey">
-                            MOW - HKT
-                        </p>
-                        <p>10:45 - 08:00</p>   
-                    </div>
-                    <div className="ticketData__item">
-                        <p className="ticketData__item__grey">
-                            MOW - HKT
-                        </p>
-                        <p>10:45 - 08:00</p>   
-                    </div>
-                </div>
-                <div className="ticketData">
-                    <div className="ticketData__item">
-                        <p className="ticketData__item__grey">
-                            MOW - HKT
-                        </p>
-                        <p>10:45 - 08:00</p>   
-                    </div>
-                    <div className="ticketData__item">
-                        <p className="ticketData__item__grey">
-                            MOW - HKT
-                        </p>
-                        <p>10:45 - 08:00</p>   
-                    </div>
-                    <div className="ticketData__item">
-                        <p className="ticketData__item__grey">
-                            MOW - HKT
-                        </p>
-                        <p>10:45 - 08:00</p>   
-                    </div>
-                </div>
+                {ticket.segments.map(segment => (
+                    <div className="ticketData" key={`${segment.date}-${segment.destination}`}>
+                      <div className="ticketData__item">
+                          <p className="ticketData__item__grey">
+                          {segment.origin} - {segment.destination}
+                          </p>
+                          <p>
+                            { new Date(segment.date).getHours() + 
+                            ":" +
+                                new Date(segment.date).getMinutes() +
+                                " - " +
+                               new Date(
+                                new Date(segment.date).setHours(
+                                    new Date().getHours() + Math.floor(segment.duration / 60)
+                                )
+                               ).getHours() + 
+                               ":" +
+                               new Date(
+                                new Date(segment.date).setMinutes(new Date(segment.date).getMinutes() + segment.duration)
+                               ).getMinutes()
+                            }
+                              {/* {segment.date} */}
+                              
+                              </p>   
+                      
+                      </div>
+                      <div className="ticketData__item">
+                          <p className="ticketData__item__grey">
+                              В пути
+                          </p>
+                        <p>{ `08:00 - 10:00` }</p>   
+                      </div>
+                      <div className="ticketData__item">
+                          <p className="ticketData__item__grey">
+                            Пересадок { segment.stops.length }
+                          </p>
+                            <p>{ segment.stops.join(', ') }</p>   
+                      </div>
+                    </div> 
+                   ))}
 
             </div>
+            ))}
             
         </div>
     )

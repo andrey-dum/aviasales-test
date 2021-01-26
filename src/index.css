@@ -63,10 +63,6 @@ a {
   width: 232px;
   margin-right: 20px;
   position: relative;
-  box-shadow: rgba(91, 137, 164, 0.25) 0px 1px 4px;
-  border-radius: 5px;
-  padding: 0 15px;
-  background: #ffffff;
 }
 
 .main {
@@ -75,6 +71,15 @@ a {
 
 .transfers {
   margin-bottom: 20px;
+  background: #ffffff;
+  box-shadow: rgba(91, 137, 164, 0.25) 0px 1px 4px;
+  border-radius: 5px;
+  padding: 0 15px;
+  width: 100%;
+  padding-bottom: 30px;
+}
+.transfers {
+  display: inline-block;
 }
 
 .transfer {
