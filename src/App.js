@@ -3,6 +3,7 @@ import Layout from "./components/Layout/Layout";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
 import Sidebar from "./components/Sidebar/Sidebar";
+import { ticketNormalize } from './helper';
 
 
 function App() {
@@ -72,7 +73,7 @@ function App() {
   //   }
   // }, [searchId, stop, tickets])
 
-  const newTikets = tickets && tickets.slice(0, 5)
+  const newTikets = tickets && ticketNormalize(tickets.slice(0, 5))
 
   return (
     <div className="app">
