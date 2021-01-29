@@ -1,19 +1,55 @@
 import React from 'react'
 
 export default function Tickets({tickets}) {
+    const [sort, setSort] = React.useState('price');
+
+    const sortFn = {
+        price: (a, b) => a.price.localeCompare(b.price),
+        // price: (a, b) => a.price - b.price,
+        faster: (a, b) => a.segments[0].duration - b.segments[0].duration
+    }
+
+    const handleSort = React.useCallback(
+        (sortBy) => {
+           if(sortBy === 'price') {
+               setSort('price')
+            return
+           } else if(sortBy === 'faster') {
+            setSort('faster')
+           }
+        },
+        
+        [],
+    )
+
+    
+
+    const getTicketsByFilter = {
+        'all': tickets => tickets.filter(tickets => tickets.important),
+        '1': tickets => tickets.filter(tickets => tickets.important),
+        '2': tickets => tickets.filter(tickets => tickets.important),
+    };
+
+    const ticketsSort = tickets && tickets.slice().sort(sortFn[sort])
+   
+  
     return (
         <div className="tickets">
 
             <div className="filterPrice">
-                <div className="filterElement filterLow__price">
+                <div 
+                    className={`${sort === 'price' ? 'active' : ''} filterElement filterLow__price`}
+                    onClick={() => handleSort('price')}>
                     Самый дешевый
                 </div>
-                <div className="filterElement filterFaster">
+                <div 
+                    className={`${sort === 'faster' ? 'active' : ''} filterElement filterFaster`} 
+                    onClick={() => handleSort('faster')}>
                     Самый быстрый
                 </div>    
             </div>
 
-            {tickets.map((ticket) => (
+            {ticketsSort.map((ticket) => (
             
             <div className="ticket" key={`${ticket.price}_${ticket.duration}`}>
                 <div className="ticketHeader">
