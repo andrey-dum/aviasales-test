@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Layout from "./components/Layout/Layout";
 import Header from "./components/Header/Header";
 import Main from "./components/Main/Main";
@@ -10,6 +10,21 @@ function App() {
   const [searchId, setSearchId] = useState()
   const [tickets, setTickets] = useState([])
   const [stop, setStop] = useState(false)
+
+  const [filter, setFilter] = React.useState({
+    all: true,
+    one: true
+  });
+
+
+  const handleChange = (e) => {
+    setFilter({
+        ...filter,
+        [e.target.name]: e.target.checked
+    })
+
+}
+
 
   useEffect(() => {
     fetch('https://front-test.beta.aviasales.ru/search')
@@ -79,8 +94,8 @@ function App() {
     <div className="app">
       <Header />
       <Layout>
-        <Sidebar />
-        <Main tickets={newTikets} />
+        <Sidebar filter={filter} handleChange={handleChange} />
+        <Main tickets={newTikets} filter={filter} />
   
       </Layout>
       

@@ -1,7 +1,19 @@
 import React from 'react'
 
-export default function Tickets({tickets}) {
+export default function Tickets({tickets, filter}) {
     const [sort, setSort] = React.useState('price');
+
+    // const [filter, setFilter] = React.useState({});
+    // const handleChange = (e) => {
+    //     setFilter({
+    //         ...filter,
+    //         [e.target.name]: e.target.checked
+    //     })
+
+    //     // if(filter.all) {
+    //     //     Object.keys(filter).map(key => setFilter({key: true}))
+    //     // }
+    // }
 
     const sortFn = {
         price: (a, b) => a.price.localeCompare(b.price),
@@ -22,15 +34,35 @@ export default function Tickets({tickets}) {
         [],
     )
 
-    
 
-    const getTicketsByFilter = {
-        'all': tickets => tickets.filter(tickets => tickets.important),
-        '1': tickets => tickets.filter(tickets => tickets.important),
-        '2': tickets => tickets.filter(tickets => tickets.important),
-    };
+    // const getTicketsByFilter = {
+    //     'all': tickets => tickets,
+    //     'one': tickets => tickets.filter(tickets => tickets.segments[0].stops.length === 1),
+    // };
 
-    const ticketsSort = tickets && tickets.slice().sort(sortFn[sort])
+    const filtered = tickets.filter(ticket => {
+        if(filter.all) {
+            return ticket
+        }
+        if(filter.without && ticket.segments[0].stops.length === 0) {
+            return ticket
+        }
+        if(filter.one && ticket.segments[0].stops.length === 1) {
+            return ticket
+        }
+        // return ticket
+    })
+
+   
+
+    // const filterdTikets = filter
+    //     ? getTodosByList(match.params.listId, state.todos)
+    // //     : getTodosByFilter[path](state.todos);
+    // const filterdTickets = filter
+    //     ? getTicketsByFilter[filter](tickets)
+    //     : tickets
+
+    const sortedTickets = tickets && filtered.slice().sort(sortFn[sort])
    
   
     return (
@@ -49,7 +81,7 @@ export default function Tickets({tickets}) {
                 </div>    
             </div>
 
-            {ticketsSort.map((ticket) => (
+            {sortedTickets.map((ticket) => (
             
             <div className="ticket" key={`${ticket.price}_${ticket.duration}`}>
                 <div className="ticketHeader">
